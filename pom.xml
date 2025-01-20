@@ -85,9 +85,20 @@
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <nodeVersion>v20.9.0</nodeVersion>
-                            <npmVersion>10.8.3</npmVersion>
+                            <workingDirectory>frontend/warehouse-angular-app</workingDirectory>
+                            <nodeVersion>v22.13.0</nodeVersion>
+                            <npmVersion>10.9.2</npmVersion>
                             <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>install-tailwind</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>frontend/warehouse-angular-app</workingDirectory>
+                            <arguments>install tailwindcss postcss autoprefixer</arguments>
                         </configuration>
                     </execution>
                     <execution>
