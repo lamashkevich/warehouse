@@ -19,6 +19,7 @@ The Warehouse Management System is an application designed for:
 - **Maven**
 - **WebClient** (for interacting with external APIs)
 - **JUnit 5** (for testing)
+- **Angular** (for frontend)
 
 ---
 ## Installation and Running

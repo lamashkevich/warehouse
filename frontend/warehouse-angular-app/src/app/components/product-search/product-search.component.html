@@ -1,0 +1,77 @@
+<div class="p-4 bg-gray-100 rounded-lg shadow-sm">
+  @for (product of products; track $index) {
+  <div class="mb-2 p-4 bg-gray-100 rounded-lg shadow-sm hover:bg-gray-200 w-full flex">
+    <div class="mx-4 w-1/4">
+      <p class="font-semibold cursor-pointer">{{ product.brand + " " + product.code }}</p>
+      <p class="font-light">{{product.name}}</p>
+    </div>
+    <div class="mx-auto w-2/4">
+      <table class="w-full table-fixed">
+        <tbody>
+          @for (inventory of product.prices; track $index) {
+          <tr>
+            <td class="px-3 py-1 ">
+              <p>{{ inventory.value }} BYN.</p>
+            </td>
+            <td class="px-6 py-1 ">{{ inventory.quantity }} ШТ.</td>
+            <td class="px-6 py-1 ">{{ inventory.createdAt | date : "dd MMM HH:mm" }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="mx-1">
+      <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded m-1"
+        (click)="delete(product.id)">
+        Удалить
+      </button>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 m-1" (click)="openModal(product)">
+        Продать
+      </button>
+    </div>
+  </div>
+  }
+
+  @if (products.length < 1) { Упс... ничего не надйено! } 
+</div>
+
+<div *ngIf="isModalOpen" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+  <div class="bg-white rounded-lg shadow-lg w-1/3 p-6 relative">
+    <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-800" (click)="closeModal()">
+      &times;
+    </button>
+
+    <h2 class="text-xl font-semibold mb-4">Продать:</h2>
+    <div>
+      <ul *ngIf="sellItems.length > 0" class="space-y-4">
+        <li *ngFor="let result of sellItems" class="p-2 hover:bg-gray-100 cursor-pointer">
+          <div class="flex items-center space-x-4 justify-between">
+            <span class="text-sm font-medium">Цена: {{ result.price }} BYN</span>
+            <span class="text-sm font-medium">Дата: {{ result.createdAt | date : "dd MMM HH:mm" }}</span>
+            <span class="text-sm font-medium">Доступно: {{ result.quantity }}</span>
+            <span class="text-sm font-medium">Выбрано:</span>
+            <input type="number" class="border rounded px-2 w-16" [min]="0" [max]="result.quantity" placeholder="0"
+              [(ngModel)]="result.sellQuantity" (ngModelChange)="updateQuantity(result.id,$event)" />
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="flex justify-end mt-2">
+      <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mr-2" (click)="closeModal()">
+        Отменить
+      </button>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" (click)="confirmSell()">
+        Подтвердить
+      </button>
+    </div>
+  </div>
+</div>
+
+    <div *ngIf="showSuccessAlert" class="fixed bottom-8 right-8 bg-green-500 text-white py-2 px-4 rounded-lg shadow-md">
+      {{alertMessage}}
+    </div>
+
+    <div *ngIf="showErrorAlert" class="fixed bottom-8 right-8 bg-red-500 text-white py-2 px-4 rounded-lg shadow-md">
+      Ошибка при добавлении продуктов.
+    </div>

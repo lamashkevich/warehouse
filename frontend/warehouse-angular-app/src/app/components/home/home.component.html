@@ -1,0 +1,27 @@
+<div class="flex items-center justify-center" style="height: calc(100vh - 200px)">
+    <div class="border p-4 rounded shadow-md max-w-lg mx-auto">
+        <h2 class="text-xl font-bold mb-4">Cтатистика склада</h2>
+
+        <div class="flex justify-between mb-2 gap-4">
+            <span class="text-gray-700 font-medium">Общее количество товаров:</span>
+            <span class="text-black font-bold">{{ statistics.totalQuantity }} шт.</span>
+        </div>
+
+        <div class="flex justify-between mb-2 gap-4">
+            <span class="text-gray-700 font-medium">Общая стоимость товаров:</span>
+            <span class="text-black font-bold">{{ statistics.totalPrice }} BYN</span>
+        </div>
+        <div class="flex justify-between gap-4">
+            <span class="text-gray-700 font-medium">Дата последнего добавления:</span>
+            <span class="text-black font-bold">{{ statistics.lastAdded | date : "dd MMM HH:mm" }}</span>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showSuccessAlert" class="fixed bottom-8 right-8 bg-green-500 text-white py-2 px-4 rounded-lg shadow-md">
+    Продукты успешно добавлены!
+</div>
+
+<div *ngIf="showErrorAlert" class="fixed bottom-8 right-8 bg-red-500 text-white py-2 px-4 rounded-lg shadow-md">
+    Ошибка при добавлении продуктов.
+</div>
