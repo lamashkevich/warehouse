@@ -8,7 +8,6 @@ The Warehouse Management System is an application designed for:
 - Sales of products
 - Retrieve statistics.
 
----
 ## Technologies
 
 - **Java 21**
@@ -21,7 +20,6 @@ The Warehouse Management System is an application designed for:
 - **JUnit 5** (for testing)
 - **Angular** (for frontend)
 
----
 ## Installation and Running
 
 ### 1. **Clone the repository:**
